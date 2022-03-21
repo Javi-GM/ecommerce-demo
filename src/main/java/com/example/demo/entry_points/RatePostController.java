@@ -2,6 +2,7 @@ package com.example.demo.entry_points;
 
 import java.net.URI;
 
+import com.example.demo.application.RateCreator;
 import com.example.demo.domain.Rate;
 
 import org.springframework.http.HttpStatus;
@@ -12,14 +13,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public final class RatePostController {
 
+    private RateCreator rateCreator;
+
+    public RatePostController(RateCreator rateCreator) {
+        this.rateCreator = rateCreator;
+    }
+
     @PostMapping("rates")
     public ResponseEntity<Rate> create(final Request request) {
-        // return a Rate, status and set the location
-        //TODO implement
-        int rateId = 0;
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .location(URI.create("/rates/" + rateId))
-                .body(null);
+        Rate rate = rateCreator.createRate(
+            request.brandId(),
+            request.productId(),
+            request.startDate(),
+            request.endDate(),
+            request.price(),
+            request.currencyCode()
+        );
+        int rateId = rate.id();
+
+        URI location = URI.create("/rates/" + rateId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).location(location).body(rate);
     }
 
     private final class Request {
@@ -30,7 +44,7 @@ public final class RatePostController {
         private int price;
         private String currencyCode;
 
-        public int getBrandId() {
+        public int brandId() {
             return brandId;
         }
 
@@ -38,7 +52,7 @@ public final class RatePostController {
             this.brandId = brandId;
         }
 
-        public int getProductId() {
+        public int productId() {
             return productId;
         }
 
@@ -46,7 +60,7 @@ public final class RatePostController {
             this.productId = productId;
         }
 
-        public String getStartDate() {
+        public String startDate() {
             return startDate;
         }
 
@@ -54,7 +68,7 @@ public final class RatePostController {
             this.startDate = startDate;
         }
 
-        public String getEndDate() {
+        public String endDate() {
             return endDate;
         }
 
@@ -62,7 +76,7 @@ public final class RatePostController {
             this.endDate = endDate;
         }
 
-        public int getPrice() {
+        public int price() {
             return price;
         }
 
@@ -70,7 +84,7 @@ public final class RatePostController {
             this.price = price;
         }
 
-        public String getCurrencyCode() {
+        public String currencyCode() {
             return currencyCode;
         }
 

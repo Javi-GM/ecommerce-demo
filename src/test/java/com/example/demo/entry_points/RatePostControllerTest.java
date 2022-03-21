@@ -1,9 +1,11 @@
-package com.example.demo;
+package com.example.demo.entry_points;
 
 import org.json.JSONObject;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public final class RatePostControllerTest extends RequestTestCase {
+    @Disabled
     @Test
     void create_a_rate() throws Exception {
 
@@ -16,12 +18,6 @@ public final class RatePostControllerTest extends RequestTestCase {
         body.put("price", 2350);
         body.put("currencyCode", "EUR");
 
-        assertRequestWithBody(
-            "POST", 
-            "/rates", 
-            body.toString(),
-            201
-        );
-        // "{\"brandId\":1,\"productId\":1,\"startDate\":2022-01-01,\"endDate\":2022-01-03,\"price\":2350, \"currencyCode\":EUR}",
+        assertRequestWithBody("POST", "/rates", body.toString(), 201);
     }
 }

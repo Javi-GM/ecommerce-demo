@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.entry_points;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @SpringBootTest
@@ -76,3 +77,4 @@ public abstract class RequestTestCase {
     }
 
 }
+
