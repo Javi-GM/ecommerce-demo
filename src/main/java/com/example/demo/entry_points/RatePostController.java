@@ -1,5 +1,9 @@
 package com.example.demo.entry_points;
 
+import java.net.URI;
+
+import com.example.demo.domain.Rate;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,8 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 public final class RatePostController {
 
     @PostMapping("rates")
-    public ResponseEntity<HttpStatus> create(final Request request) {
-        return new ResponseEntity<HttpStatus>(HttpStatus.CREATED);
+    public ResponseEntity<Rate> create(final Request request) {
+        // return a Rate, status and set the location
+        //TODO implement
+        int rateId = 0;
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .location(URI.create("/rates/" + rateId))
+                .body(null);
     }
 
     private final class Request {
