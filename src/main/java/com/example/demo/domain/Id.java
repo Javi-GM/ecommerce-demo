@@ -7,7 +7,6 @@ import java.util.UUID;
 public class Id implements Serializable {
     final private String value;
 
-    //hibernate requires a no-arg constructor for reflection
     private Id() {
         this.value = null;
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
  <hibernate-mapping package="com.example.demo.domain">
-     <class name="com.example.demo.domain.Rate" table="T_RATES" >
+     <class name="com.example.demo.domain.Rate" table="t_rates" >
         <composite-id name="id" class="Id" access="field" >
             <key-property column="ID" name="value" type="string" length="36" access="field"/>
         </composite-id>

@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-@Disabled
 public final class RatePostControllerTest extends RequestTestCase {
     @Test
     void create_a_rate() throws Exception {

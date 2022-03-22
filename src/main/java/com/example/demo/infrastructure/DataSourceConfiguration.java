@@ -34,7 +34,7 @@ public class DataSourceConfiguration {
 
         // postgresql Configuration
         dataSourceBuilder.driverClassName("org.postgresql.Driver");
-        dataSourceBuilder.url("jdbc:postgresql://localhost:5432/exercicedb");
+        dataSourceBuilder.url("jdbc:postgresql://localhost:5432/postgres");
         dataSourceBuilder.username("postgres");
         dataSourceBuilder.password("postgres");
 
