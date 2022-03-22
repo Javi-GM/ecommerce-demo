@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping package="com.example.demo.domain">
+     <class name="com.example.demo.domain.Rate" table="T_RATES" >
+        <composite-id name="id" class="Id" access="field" >
+            <key-property column="ID" name="value" type="string" length="36" access="field"/>
+        </composite-id>
+        <component name="brandId" class="Id" access="field">
+            <property name="value" column="BRAND_ID" type="string" length="36" access="field"/>
+        </component>
+        <component name="productId" class="com.example.demo.domain.Id" access="field">
+            <property name="value" column="PRODUCT_ID" type="string" length="36" access="field"/>
+        </component>
+        <component name="availabilityIntervalTime" class="com.example.demo.domain.RateAvailabilityIntervalTime" access="field">
+            <property name="startDate" column="START_DATE" type="LocalDate" access="field"/>
+            <property name="endDate" column="END_DATE" type="LocalDate" access="field"/>
+        </component>
+        <component name="price" class="com.example.demo.domain.RatePrice" access="field">
+            <property name="value" column="PRICE" type="int" access="field"/>
+        </component>
+        <component name="currency" class="com.example.demo.domain.Currency" access="field">
+            <property name="value" column="CURRENCY_CODE" type="string" access="field"/>
+        </component>
+     </class>
+ </hibernate-mapping>

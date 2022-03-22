@@ -2,12 +2,16 @@ package com.example.demo.entry_points;
 
 import java.net.URI;
 
+import com.example.demo.application.CreateRateRequest;
 import com.example.demo.application.RateCreator;
 import com.example.demo.domain.Rate;
+import com.example.demo.utils.DateUtils;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,44 +23,46 @@ public final class RatePostController {
         this.rateCreator = rateCreator;
     }
 
-    @PostMapping("rates")
-    public ResponseEntity<Rate> create(final Request request) {
-        Rate rate = rateCreator.createRate(
-            request.brandId(),
-            request.productId(),
-            request.startDate(),
-            request.endDate(),
-            request.price(),
-            request.currencyCode()
+    @PutMapping("rates/{id}")
+    public ResponseEntity<HttpStatus> create(@PathVariable String id, Request request) {
+        rateCreator.createRate(
+            new CreateRateRequest(
+                id,
+                request.brandId(),
+                request.productId(),
+                request.startDate(),
+                request.endDate(),
+                request.price(),
+                request.currencyCode()
+            )
         );
-        int rateId = rate.id();
 
-        URI location = URI.create("/rates/" + rateId);
+        URI location = URI.create("/rates/" + id);
 
-        return ResponseEntity.status(HttpStatus.CREATED).location(location).body(rate);
+        return ResponseEntity.created(location).build();
     }
 
-    private final class Request {
-        private int brandId;
-        private int productId;
+    class Request {
+        private String brandId;
+        private String productId;
         private String startDate;
         private String endDate;
         private int price;
         private String currencyCode;
 
-        public int brandId() {
+        public String brandId() {
             return brandId;
         }
 
-        public void setBrandId(int brandId) {
+        public void setBrandId(String brandId) {
             this.brandId = brandId;
         }
 
-        public int productId() {
+        public String productId() {
             return productId;
         }
 
-        public void setProductId(int productId) {
+        public void setProductId(String productId) {
             this.productId = productId;
         }
 

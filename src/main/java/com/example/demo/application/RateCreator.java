@@ -1,7 +1,14 @@
 package com.example.demo.application;
 
+import java.time.LocalDate;
+
+import com.example.demo.domain.Currency;
+import com.example.demo.domain.Id;
 import com.example.demo.domain.Rate;
+import com.example.demo.domain.RateAvailabilityIntervalTime;
+import com.example.demo.domain.RatePrice;
 import com.example.demo.domain.RateRepository;
+import com.example.demo.utils.DateUtils;
 
 import org.springframework.stereotype.Service;
 
@@ -14,23 +21,22 @@ public final class RateCreator {
         this.rateRepository = rateRepository;
     }
 
-    public Rate createRate(
-        int brandId, 
-        int productId, 
-        String startDate, 
-        String endDate, 
-        int price, 
-        String currencyCode
-    ) {
+    public void createRate(CreateRateRequest request) {
         Rate rate = new Rate(
-            brandId,
-            productId,
-            startDate,
-            endDate,
-            price,
-            currencyCode
+            new Id(request.id()),
+            new Id(request.brandId()),
+            new Id(request.productId()),
+            new RateAvailabilityIntervalTime(
+                DateUtils.fromYYYYMMDDToLocalDate(request.startDate()), 
+                DateUtils.fromYYYYMMDDToLocalDate(request.endDate()) 
+            ),
+            new RatePrice(request.price()),
+            new Currency(request.currencyCode())
         );
 
-        return rateRepository.save(rate);
+        System.out.println("Creating rate: ");
+        System.out.println(rate);
+
+        rateRepository.save(rate);
     }
 }

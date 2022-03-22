@@ -1,12 +1,17 @@
 package com.example.demo.application;
 
-import com.example.demo.domain.Rate;
-import com.example.demo.domain.RateRepository;
-
-import static org.mockito.Mockito.verify;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+
+import java.time.LocalDate;
+import java.util.UUID;
+
+import com.example.demo.domain.Currency;
+import com.example.demo.domain.Id;
+import com.example.demo.domain.Rate;
+import com.example.demo.domain.RateAvailabilityIntervalTime;
+import com.example.demo.domain.RatePrice;
+import com.example.demo.domain.RateRepository;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,16 +28,37 @@ public class RateCreatorTest {
     void create_a_rate() {
         RateCreator rateCreator = new RateCreator(rateRepository);
 
-        Rate rateBeforeSave = new Rate(1, 1, "", "", 1, "EUR");
-        Rate rateAfterSave = new Rate(1, 1, "", "", 1, "EUR");
-        rateAfterSave.setId(1);
+        LocalDate startDate = LocalDate.of(2021, 1, 1);
+        LocalDate endDate = LocalDate.of(2021, 1, 9);
 
-        when(rateRepository.save(rateBeforeSave)).thenReturn(rateAfterSave);
+        String id = UUID.randomUUID().toString();
+        String brandId = UUID.randomUUID().toString();
+        String productId = UUID.randomUUID().toString();
 
-        Rate rateCreated = rateCreator.createRate(1, 1, "", "", 1, "EUR");
+        Rate rate = new Rate(
+            new Id(id),
+            new Id(brandId),
+            new Id(productId),
+            new RateAvailabilityIntervalTime(startDate, endDate),
+            new RatePrice(1000), 
+            new Currency("EUR")
+        );
 
-        verify(rateRepository, atLeastOnce()).save(rateBeforeSave);
-        assertTrue(rateAfterSave.equals(rateCreated));
+        CreateRateRequest createRateRequest = new CreateRateRequest(
+            id,
+            brandId,
+            productId,
+            "2021-01-01",
+            "2021-01-09",
+            1000, 
+            "EUR"
+        );
+
+        rateCreator.createRate(createRateRequest);
+
+        System.out.println("Rate en el test: ");
+        System.out.println(rate);
+        verify(rateRepository, atLeastOnce()).save(rate);
     }
 }
 
