@@ -16,10 +16,13 @@ public class FakeCurrencyRepository implements CurrencyRepository {
         // WireMockServer wireMockServer = new WireMockServer(String host, int port);
 
         // manually mocking...
+        // for all currency codes
         var currency = switch (id.value()) {
             case "USD"-> new Currency("USD", "$", 2);
             case "EUR"-> new Currency("EUR", "€", 2);
             case "GBP"-> new Currency("GBP", "£", 2);
+            case "JPY"-> new Currency("JPY", "¥", 0);
+            case "CHF"-> new Currency("CHF", "CHF", 2);
 
             default -> null;
         };

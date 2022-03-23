@@ -11,6 +11,8 @@ public final class Rate {
     private RatePrice price;
 	private CurrencyCode currencyCode;
 
+    private Rate() {}
+
 	public Rate(
         Id id,
         Id brandId, 

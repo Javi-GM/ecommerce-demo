@@ -1,0 +1,78 @@
+openapi: 3.0.3
+info:
+  title: Rates Api
+  description: Handle basic rates operations
+  version: "1.0"
+servers:
+  - url: https://localhost:8080/
+    description: Sandbox server to test basic rates operations
+tags:
+- name: rates
+  description: Available operations for rates domain.
+paths:
+  /rates/{id}:
+    get:
+      tags:
+      - rates
+      summary: Get rate detail
+      operationId: getRateById
+      parameters:
+        - in: path
+          description: The rate identifier
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rate'
+        404:
+          description: Rate not found
+components:
+  schemas:
+    Rate:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        brandId:
+          type: string
+          format: uuid
+        productId:
+          type: string
+          format: uuid
+        startDate:
+          type: string
+          description: Rate initial date
+          example: "2021-01-01"
+        endDate:
+          type: string
+          description: Rate ending date
+          example: "2021-03-10"        
+        price:
+          type: number
+          format: double
+          example: 1050.23
+        currencySymbol:
+          type: string
+          minLength: 1
+          maxLength: 1
+        currencyCode:
+          type: string
+          minLength: 3
+          maxLength: 3
+      required:
+        - id
+        - brandId
+        - productId
+        - startDate
+        - endDate
+        - price
+        - currencySymbol
+        - currencyCode

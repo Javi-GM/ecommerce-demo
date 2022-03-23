@@ -25,7 +25,7 @@ public final class RateGetController {
     }
 
     @GetMapping("/rates/{id}")
-    public ResponseEntity<Response> getRate(@PathVariable("id") String id) throws NotFoundException {
+    public ResponseEntity<Response> getRateById(@PathVariable("id") String id) throws NotFoundException {
         //TODO implement custom exception
         Response rate = rateFinder.find(new Id(id))
                                   .map(this::rateToResponse)
