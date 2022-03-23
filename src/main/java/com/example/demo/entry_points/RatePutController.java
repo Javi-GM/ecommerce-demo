@@ -26,23 +26,27 @@ class RatePutController {
 
     @PutMapping("rates/{id}")
     public ResponseEntity<HttpStatus> createRate(@PathVariable String id, @RequestBody RateDTO request) {
-        Optional<Rate> rateFound = rateFinder.find(new Id(id));
-        rateUpserter.upsertRate(
-            new UpsertRateRequest(
-                id,
-                request.getBrandId(),
-                request.getProductId(),
-                request.getStartDate(),
-                request.getEndDate(),
-                request.getPrice(),
-                request.getCurrencyCode()
-            )
-        );
+        try {
+            Optional<Rate> rateFound = rateFinder.find(new Id(id));
+            rateUpserter.upsertRate(
+                new UpsertRateRequest(
+                    id,
+                    request.getBrandId(),
+                    request.getProductId(),
+                    request.getStartDate(),
+                    request.getEndDate(),
+                    request.getPrice(),
+                    request.getCurrencyCode()
+                )
+            );
 
-        URI location = URI.create("/rates/" + id);
+            URI location = URI.create("/rates/" + id);
 
-        return rateFound.isPresent() ?
-            ResponseEntity.noContent().location(location).build() :
-            ResponseEntity.created(location).build();
+            return rateFound.isPresent() ?
+                ResponseEntity.noContent().location(location).build() :
+                ResponseEntity.created(location).build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
