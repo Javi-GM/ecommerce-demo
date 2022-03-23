@@ -7,13 +7,5 @@ public class RatePrice extends ValueObject<Integer> {
 
     public RatePrice(Integer value) {
         super(value);
-
-        testPriceIsNotUnderZero();
     }
-
-	private void testPriceIsNotUnderZero() {
-        if (value < 0) {
-            throw new IllegalArgumentException("Price cannot be under zero");
-        }
-	}
 }

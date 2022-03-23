@@ -20,8 +20,8 @@ public final class CurrencyCode extends ValueObject<String> {
     }
 
     private void testMaxLength() {
-        if (value.length() > 3) {
-            throw new IllegalArgumentException("Currency cannot be longer than 3 characters");
+        if (value.length() != 3) {
+            throw new IllegalArgumentException("Currency code must be 3 characters");
         }
     }
 }
