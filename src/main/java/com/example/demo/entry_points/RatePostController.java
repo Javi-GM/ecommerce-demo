@@ -4,16 +4,10 @@ import java.net.URI;
 
 import com.example.demo.application.CreateRateRequest;
 import com.example.demo.application.RateCreator;
-import com.example.demo.domain.Rate;
-import com.example.demo.utils.DateUtils;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 class RatePostController {

@@ -9,7 +9,7 @@ public final class Rate {
 	private Id productId;
     private RateAvailabilityIntervalTime availabilityIntervalTime;
     private RatePrice price;
-	private Currency currency;
+	private CurrencyCode currencyCode;
 
 	public Rate(
         Id id,
@@ -17,14 +17,14 @@ public final class Rate {
         Id productId, 
         RateAvailabilityIntervalTime availabilityIntervalTime, 
         RatePrice price, 
-        Currency currency
+        CurrencyCode currencyCode
     ) {
         this.id = id;
         this.brandId = brandId;
         this.productId = productId;
         this.availabilityIntervalTime = availabilityIntervalTime;
         this.price = price;
-        this.currency = currency;
+        this.currencyCode = currencyCode;
 	}
 
     public Id id() {
@@ -34,6 +34,26 @@ public final class Rate {
 	public void setId(Id id) {
         this.id = id;
 	}
+
+    public CurrencyCode currencyCode() {
+        return currencyCode;
+    }
+
+    public Id brandId() {
+        return brandId;
+    }
+
+    public Id productId() {
+        return productId;
+    }
+
+    public RateAvailabilityIntervalTime availabilityIntervalTime() {
+        return availabilityIntervalTime;
+    }
+
+    public RatePrice price() {
+        return price;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -47,7 +67,7 @@ public final class Rate {
                Objects.equals(productId, rate.productId) &&
                Objects.equals(availabilityIntervalTime, rate.availabilityIntervalTime) &&
                Objects.equals(price, rate.price) &&
-               Objects.equals(currency, rate.currency);
+               Objects.equals(currencyCode, rate.currencyCode);
     }
 
     @Override
@@ -58,7 +78,7 @@ public final class Rate {
             productId, 
             availabilityIntervalTime, 
             price, 
-            currency
+            currencyCode
         );
     }
 
@@ -70,7 +90,7 @@ public final class Rate {
                ", productId=" + productId +
                ", availabilityIntervalTime=" + availabilityIntervalTime +
                ", price=" + price +
-               ", currency=" + currency +
+               ", currency=" + currencyCode +
                '}';
     }
 }

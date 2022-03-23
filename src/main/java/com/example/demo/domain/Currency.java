@@ -1,27 +1,25 @@
 package com.example.demo.domain;
 
-public final class Currency extends ValueObject<String> {
-    private Currency() {
-        super(null);
+public final class Currency {
+    private final String code;
+	private final String symbol;
+	private final int decimalPlaces;
+
+	public Currency(String code, String symbol, int decimalPlaces) {
+        this.code = code;
+        this.symbol = symbol;
+        this.decimalPlaces = decimalPlaces;
     }
 
-    public Currency(String value) {
-        super(value);
-
-        testArgs();
+    public double obtainPriceWithDecimalPlaces(int price) {
+        return price / Math.pow(10, decimalPlaces);
     }
 
-    private void testArgs() {
-        if (value == null || value.isEmpty()) {
-            throw new IllegalArgumentException("Currency cannot be null");
-        }
-
-        testMaxLength();
+    public String code() {
+        return code;
     }
 
-    private void testMaxLength() {
-        if (value.length() > 3) {
-            throw new IllegalArgumentException("Currency cannot be longer than 3 characters");
-        }
+    public String symbol() {
+        return symbol;
     }
 }

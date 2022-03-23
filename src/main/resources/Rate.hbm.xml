@@ -18,7 +18,7 @@
         <component name="price" class="com.example.demo.domain.RatePrice" access="field">
             <property name="value" column="PRICE" type="int" access="field"/>
         </component>
-        <component name="currency" class="com.example.demo.domain.Currency" access="field">
+        <component name="currencyCode" class="com.example.demo.domain.CurrencyCode" access="field">
             <property name="value" column="CURRENCY_CODE" type="string" access="field"/>
         </component>
      </class>

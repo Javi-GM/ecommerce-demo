@@ -19,6 +19,14 @@ public final class RateAvailabilityIntervalTime {
         testArgs();
     }
 
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
     private void testArgs() {
         if (startDate.isAfter(endDate)) {
             throw new IllegalArgumentException("Start date must be before end date");

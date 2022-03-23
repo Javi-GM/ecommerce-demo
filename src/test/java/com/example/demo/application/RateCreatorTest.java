@@ -6,12 +6,13 @@ import static org.mockito.Mockito.verify;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import com.example.demo.domain.Currency;
+import com.example.demo.domain.CurrencyCode;
 import com.example.demo.domain.Id;
 import com.example.demo.domain.Rate;
 import com.example.demo.domain.RateAvailabilityIntervalTime;
 import com.example.demo.domain.RatePrice;
 import com.example.demo.domain.RateRepository;
+import com.example.demo.infrastructure.FakeCurrencyRepository;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +28,9 @@ public class RateCreatorTest {
     @Test
     void create_a_rate() {
         RateCreator rateCreator = new RateCreator(rateRepository);
+        
+        //dudas
+        rateCreator.setCurrencyManager(new CurrencyManager(new FakeCurrencyRepository()));
 
         LocalDate startDate = LocalDate.of(2021, 1, 1);
         LocalDate endDate = LocalDate.of(2021, 1, 9);
@@ -41,7 +45,7 @@ public class RateCreatorTest {
             new Id(productId),
             new RateAvailabilityIntervalTime(startDate, endDate),
             new RatePrice(1000), 
-            new Currency("EUR")
+            new CurrencyCode("EUR")
         );
 
         CreateRateRequest createRateRequest = new CreateRateRequest(

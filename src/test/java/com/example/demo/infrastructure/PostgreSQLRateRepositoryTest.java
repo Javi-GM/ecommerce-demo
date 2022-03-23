@@ -1,6 +1,6 @@
 package com.example.demo.infrastructure;
 
-import com.example.demo.domain.Currency;
+import com.example.demo.domain.CurrencyCode;
 import com.example.demo.domain.Id;
 import com.example.demo.domain.Rate;
 import com.example.demo.domain.RateAvailabilityIntervalTime;
@@ -36,7 +36,7 @@ public class PostgreSQLRateRepositoryTest {
                new Id(UUID.randomUUID().toString()),
                new RateAvailabilityIntervalTime(LocalDate.now(), LocalDate.now().plusDays(1)),
                new RatePrice(1), 
-               new Currency("EUR")
+               new CurrencyCode("EUR")
         ));
 
         Optional<Rate> rateFoundOnDB = repository.search(rateId);
