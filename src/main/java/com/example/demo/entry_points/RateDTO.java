@@ -8,15 +8,6 @@ public class RateDTO {
     private int price;
     private String currencyCode;
 
-    public RateDTO(String brandId, String productId, String startDate, String endDate, int price, String currencyCode) {
-        this.brandId = brandId;
-        this.productId = productId;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.price = price;
-        this.currencyCode = currencyCode;
-    }
-
     public String getBrandId() {
         return brandId;
     }

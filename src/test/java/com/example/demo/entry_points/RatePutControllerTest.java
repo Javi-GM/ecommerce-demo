@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-public final class RatePostControllerTest extends RequestTestCase {
+public final class RatePutControllerTest extends RequestTestCase {
     @Test
     void create_a_rate() throws Exception {
 

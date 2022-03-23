@@ -1,6 +1,6 @@
 package com.example.demo.application;
 
-public final record CreateRateRequest(
+public final record UpsertRateRequest(
     String id, 
     String brandId, 
     String productId, 

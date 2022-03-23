@@ -4,7 +4,7 @@ info:
   description: Handle basic rates operations
   version: "1.0"
 servers:
-  - url: https://localhost:8080/
+  - url: http://localhost:8080/
     description: Sandbox server to test basic rates operations
 tags:
 - name: rates
@@ -33,6 +33,54 @@ paths:
                 $ref: '#/components/schemas/Rate'
         404:
           description: Rate not found
+    put:
+      tags:
+      - rates
+      summary: Update a rate or create if doesn't exists
+      operationId: upsertRate
+      parameters:
+        - in: path
+          name: id
+          description: The rate identifier
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: Required info for a upsert Rate
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                brandId:
+                  type: string
+                  format: uuid
+                productId:
+                  type: string
+                  format: uuid
+                startDate: 
+                  type: string
+                  format: date
+                  example: "2021-01-10"
+                endDate:
+                  type: string
+                  format: date
+                  example: "2021-01-10"
+                price:
+                  type: integer
+                currencyCode:
+                  type: string
+                  maxLength: 3
+                  minLength: 3
+      responses:
+        201:
+          description: rate created successfully
+        204:
+          description: rate updated successfully
+        default:
+          description: unexpected error occured
+      
 components:
   schemas:
     Rate:
@@ -49,10 +97,12 @@ components:
           format: uuid
         startDate:
           type: string
+          format: date
           description: Rate initial date
           example: "2021-01-01"
         endDate:
           type: string
+          format: date
           description: Rate ending date
           example: "2021-03-10"        
         price:

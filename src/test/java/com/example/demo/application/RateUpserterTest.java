@@ -20,17 +20,17 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class RateCreatorTest {
+public class RateUpserterTest {
 
     @Mock 
     private RateRepository rateRepository;
 
     @Test
     void create_a_rate() {
-        RateCreator rateCreator = new RateCreator(rateRepository);
+        RateUpserter rateUpserter = new RateUpserter(rateRepository);
         
         //dudas
-        rateCreator.setCurrencyManager(new CurrencyManager(new FakeCurrencyRepository()));
+        rateUpserter.setCurrencyManager(new CurrencyManager(new FakeCurrencyRepository()));
 
         LocalDate startDate = LocalDate.of(2021, 1, 1);
         LocalDate endDate = LocalDate.of(2021, 1, 9);
@@ -48,7 +48,7 @@ public class RateCreatorTest {
             new CurrencyCode("EUR")
         );
 
-        CreateRateRequest createRateRequest = new CreateRateRequest(
+        UpsertRateRequest createRateRequest = new UpsertRateRequest(
             id,
             brandId,
             productId,
@@ -58,7 +58,7 @@ public class RateCreatorTest {
             "EUR"
         );
 
-        rateCreator.createRate(createRateRequest);
+        rateUpserter.upsertRate(createRateRequest);
 
         System.out.println("Rate en el test: ");
         System.out.println(rate);

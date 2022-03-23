@@ -21,7 +21,7 @@ public class PostgreSQLRateRepository implements RateRepository {
 
     @Override
     public void save(Rate rate) {
-        sessionFactory.getCurrentSession().save(rate);
+        sessionFactory.getCurrentSession().saveOrUpdate(rate);
     }
 
     @Override

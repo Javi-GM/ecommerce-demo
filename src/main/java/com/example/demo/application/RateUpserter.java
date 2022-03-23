@@ -13,14 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public final class RateCreator {
+public final class RateUpserter {
 
     private final RateRepository rateRepository;
 	private CurrencyManager currencyManager;
 
-    public RateCreator(RateRepository rateRepository) {
+    public RateUpserter(RateRepository rateRepository) {
         this.rateRepository = rateRepository;
-        // this.currencyManager = currencyManager;
     }
 
     @Autowired
@@ -28,7 +27,7 @@ public final class RateCreator {
         this.currencyManager = currencyManager;
     }
 
-    public void createRate(CreateRateRequest request) {
+    public void upsertRate(UpsertRateRequest request) {
         var currencyCode = new CurrencyCode(request.currencyCode());
 
         currencyManager
